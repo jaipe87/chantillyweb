@@ -1,0 +1,552 @@
+.header_checkout {
+  position: initial;
+  width: inherit;
+}
+.nav_checkout {
+  display: grid;
+  grid-template-columns: 0.5fr 0.5fr;
+  grid-template-rows: 1fr;
+  gap: 0px 0px;
+  grid-template-areas: "logo  contacto";
+  grid-area: Header;
+  margin: auto 3%;
+}
+.logo_checkout {
+  grid-area: logo;
+}
+.contacto_checkout {
+  grid-area: contacto;
+  display: flex;
+
+  align-items: center;
+  justify-content: end;
+}
+.contacto_checkout p {
+  color: #fff;
+}
+.contacto_checkout p a {
+  color: #fff;
+  text-decoration: none;
+}
+.contacto_checkout p a:active {
+  color: inherit;
+  text-decoration: none;
+}
+#checkout-container {
+  padding: 0;
+  height: 100vh;
+}
+.wrapcheckout {
+  display: flex;
+  flex-flow: row wrap;
+  margin: auto;
+  width: 90%;
+  height: 100%;
+}
+.wrapcheckout input {
+  border: 2px solid #c41c1a;
+  padding: 5px;
+  margin: 5px 0px;
+}
+
+.wrapcheckout .form1,
+.wrapcheckout .form2 {
+  flex: 1 1 0%;
+  box-sizing: border-box;
+  padding: 20px 50px;
+  color: #000000;
+}
+
+.wrapcheckout .form1 h2,
+.wrapcheckout .form2 h2 {
+  margin-bottom: 20px;
+}
+
+.wrapcheckout .form1 {
+  background-color: #ffffff;
+}
+
+.datos h3,
+.entrega h3,
+.pago h3 {
+  color: #c41c1a;
+}
+
+.form2 {
+  background-color: #fafafa;
+}
+
+.tienda {
+  padding: 10px;
+  background-color: #c41c1a;
+  color: #ffffff;
+  margin: 10px 0;
+  cursor: pointer;
+}
+
+.seleccion {
+  text-align: center;
+  background-color: #c41c1a;
+  color: #ffffff;
+
+  margin-bottom: 15px;
+}
+
+.seleccion div {
+  display: inline-block;
+  padding: 10px 20px;
+}
+/*
+.entrega,
+.pago {
+  display: none;
+}*/
+
+select#sltctipodocumento,
+select#sltcDepartamento,
+select#sltcDistrito,
+select#sltcProvincia,
+select#notaLocalesOption {
+  color: #000000;
+  border: 2px solid #c41c1a;
+  background-color: #ffffff;
+  padding-left: 5px;
+  padding: 3px;
+  margin: 5px 0px;
+}
+
+#tarjetaCD input {
+  width: 95%;
+}
+
+.datosTarjeta {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  width: 96%;
+}
+
+.mesTarjeta {
+  grid-column: 1;
+  width: 100%;
+}
+
+.añoTarjeta {
+  grid-column: 2;
+  width: 100%;
+}
+
+.cvvTarjeta input {
+  width: 93%;
+}
+
+select#sltcMes,
+select#sltcAño {
+  color: #000000;
+  border: 2px solid #c41c1a;
+  background-color: #ffffff;
+  padding-left: 5px;
+  width: 100%;
+  padding: 4px;
+  margin: 5px;
+}
+
+#nota input#nroDocInput {
+  width: 93%;
+}
+
+.titulo_seccion {
+  margin-bottom: 15px;
+  padding: 5px;
+}
+/*
+.datos input,
+#delivery input {
+  width: 44%;
+}*/
+
+#nota input {
+  width: 43%;
+}
+
+#recojo-tienda,
+#delivery {
+  display: none;
+}
+
+.tiendas {
+  overflow-y: scroll;
+  max-height: 350px;
+}
+
+.botones-checkout {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.botones-checkout .button_checkout {
+  text-align: center;
+  color: #ffffff;
+  background-color: #c41c1a;
+  border: none;
+  width: 50%;
+  margin: 5px 0px;
+}
+
+#btnTienda {
+  text-align: center;
+  color: blue;
+  background-color: #ffffff;
+
+  border: none;
+}
+.direccionGroup {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.botones-checkout a {
+  color: #c41c1a;
+}
+
+.pago-delivery {
+  border: 2px solid #ffe44d;
+  padding: 5px;
+  margin: 5px 0px;
+  border-radius: 8px;
+}
+
+.botonesPago {
+  padding: 5px;
+  border: 2px solid #c41c1a;
+  background-color: #ffffff;
+  color: #000000;
+  margin: 10px 0;
+}
+
+#imgTable {
+  text-align: center;
+}
+
+#tbodyProducts {
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  max-height: 20px;
+}
+
+.envioCheckout,
+.subtotalCheckout,
+.totalCheckout {
+  display: flex;
+  justify-content: space-between;
+}
+.direccion {
+  display: none;
+}
+hr {
+  margin: 5px 0px;
+}
+h3 {
+  padding: 2.5px 0px;
+}
+.form1 .confirma_datos {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.form_cliente .datos_cliente {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.form_cliente .datos_cliente .form_control {
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: 5px;
+}
+.form_cliente .datos_cliente .form_control input,
+.form_cliente .datos_cliente .form_control select {
+  flex: 1 1 0%;
+}
+.form_entrega .datos_tipo_entrega {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.form_entrega .datos_tipo_entrega .form_control {
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: 5px;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+
+.form_entrega .datos_tipo_entrega .form_control label input[type="radio"] {
+  margin: 5px;
+}
+
+.datos_detalle_entrega #recojo-tienda .detalle_recojo_tienda {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.direccion_tienda_datos {
+  display: flex;
+  flex-flow: column nowrap;
+}
+.direccion iframe {
+  width: 100% !important;
+  border: 0;
+}
+.mapa {
+  margin-top: 10px;
+}
+#delivery .delivery_detalle {
+  display: flex;
+  flex-flow: column nowrap;
+}
+#delivery .delivery_detalle .datos_delivery,
+#delivery .delivery_detalle .datos-pago-delivery {
+  display: flex;
+  flex-flow: column nowrap;
+}
+#delivery .delivery_detalle .datos_delivery .form_control {
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: 5px;
+}
+#delivery .delivery_detalle .datos_delivery .form_control input,
+#delivery .delivery_detalle .datos_delivery .form_control select {
+  flex: 1 1 0%;
+}
+
+/** Tabla de compras **/
+.table {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.table-header,
+.table-row {
+  display: flex;
+  width: 100%;
+}
+
+.header-item,
+.table-item {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  border-bottom: 1px solid #ccc;
+}
+
+.header-item {
+  background-color: #f0f0f0;
+  font-weight: bold;
+}
+
+.table-item img {
+  width: 100%;
+  height: auto;
+}
+
+.text-center {
+  text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.text-left {
+  text-align: left;
+}
+.detalle_item{
+  display: flex;
+  flex-flow: column nowrap;
+}
+.detalle_torta{
+  display: flex;
+  flex-direction: column;
+  -moz-box-flex: 1;
+  flex-grow: 1;
+  -moz-box-pack: center;
+  justify-content: center;
+}
+.detalle_torta p{
+  color: rgb(82, 82, 91);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+/*********************/
+.buttons-save {
+  display: flex;
+  flex-flow: column wrap;
+  padding: 10px 0px;
+  row-gap: 5px;
+}
+.buttons-save button {
+  text-align: center;
+  color: #ffffff;
+  background-color: #c41c1a;
+  border: none;
+  width: 100%;
+}
+.edit_cart {
+  font-size: 15px;
+  color: #c41c1a;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.edit_cart a:active,
+.edit_cart a:link,
+.edit_cart a:focus,
+.edit_cart a:visited {
+  color: #c41c1a;
+}
+.sumary_header h2 {
+  margin-bottom: 0px !important;
+}
+.sumary_header {
+  display: flex;
+  flex-flow: row nowrap;
+  column-gap: 10px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.totales_compra .totalCheckout {
+  font-size: 1.2rem !important;
+  font-weight: 700;
+  color: #c41c1a;
+}
+.totales_compra .envioCheckout,
+.totales_compra .subtotalCheckout {
+  font-size: 1.05rem !important;
+  font-weight: 700;
+}
+.jm-loadingpage {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  z-index: 999999999;
+  
+  background-color: #ffffff;
+  background: url(./../images/loadingpage.gif) center no-repeat #fff;
+}
+.tienda h5 {
+
+  letter-spacing: -0.5px
+}
+.jm-cargaTemp {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  display: none;
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+  z-index: 999999999;
+  background: url(./../images/378.gif) center no-repeat #fff;
+}
+.form_control .control{
+  display:  flex;
+  flex-flow: column nowrap;
+  flex : 1 1 0%;
+}
+.form_control .control label{
+  font-size: 14px;
+  padding : 0px 2px;
+}
+
+@media (max-width: 550px) {
+  .nav_checkout {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(2, 1fr);
+    gap: 0px;
+    grid-template-areas:
+      "logo"
+      "contacto";
+    grid-area: Header;
+    padding-top: 10px;
+  }
+  .logo_checkout {
+    grid-area: logo;
+    display: flex;
+    justify-content: center;
+  }
+  .contacto_checkout {
+    font-size: 14px;
+    justify-content: center;
+  }
+  .form1,
+  .form2 {
+    padding: 20px 20px !important;
+  }
+
+  .wrapcheckout {
+    width: 95%;
+    flex-flow: column nowrap;
+  }
+
+  .header_checkout {
+    padding: 2px 5px;
+  }
+  .wrapcheckout h2 {
+    font-size: 1.3em;
+  }
+  .botones-checkout .button_checkout {
+    width: 100%;
+  }
+  .sumary_header {
+    flex-flow: column;
+  }
+}
+
+@media (min-width: 550px) {
+  .header_checkout {
+    padding: 10px 5px;
+    width: auto;
+  }
+  .wrapcheckout {
+    width: auto !important;
+  }
+}
+@media (min-width: 1000px) {
+  .header_checkout {
+    padding: 20px;
+  }
+  .wrapcheckout {
+    width: 90% !important;
+  }
+}
+@media (max-width: 1024px) {
+  .sumary_header {
+    flex-flow: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-item,
+  .table-item {
+    font-size: 14px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-item,
+  .table-item {
+    font-size: 12px;
+    padding: 6px;
+  }
+}

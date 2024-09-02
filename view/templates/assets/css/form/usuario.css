@@ -1,0 +1,27 @@
+
+
+.thead-center{
+    text-align: center;
+}
+
+.pre-style{
+     font-family: "Open Sans", sans-serif;
+     font-size: 16px;
+     margin: 0;
+     font-weight: 700;
+ }
+.sub-pre-style{
+    font-family: "Open Sans", sans-serif;
+    font-size: 15px;
+    margin: 0;
+}
+.list_permisos{
+    margin-left:50px;
+}
+
+.input-group-addon{
+    border-radius: 0 .25rem .25rem 0 !important;
+    border-left: 0px;
+    cursor: pointer;
+  }
+  

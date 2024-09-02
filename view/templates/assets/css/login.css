@@ -1,0 +1,237 @@
+/*LOGIN*/
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.4);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 10% auto;
+  padding: 10px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content-register {
+  background-color: #fefefe;
+  margin: 1% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 600px !important;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+  color: #aaa;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-right: 8px;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+}
+
+.sufee-login {
+  padding: 15px;
+}
+
+.login-content {
+  padding: 10px;
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 5px;
+  background-color: #c41c1a;
+  color: #fff;
+  font-size: 24px;
+  text-decoration: none;
+}
+
+.login-form {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.form-control {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  display: block;
+}
+
+.input-group {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group-addon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.btn-danger {
+  background-color: #c41c1a;
+  color: white;
+  border: none;
+}
+
+.btn-danger:hover {
+  background-color: #a81311;
+}
+.form_lastname {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+
+.form_numbers {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 10px;
+  text-align: left;
+}
+.form_numbers .form-group-nrodoc {
+  flex: 1 1 50%;
+  padding-right: 5px;
+}
+.form_numbers .form-group-celular {
+  flex: 1 1 50%;
+  padding-left: 5px;
+  display: flex;
+  flex-direction: column;
+}
+.form_numbers .form-group-nrodoc .form-group-nrodoc-container {
+  display: flex;
+  flex-direction: column;
+}
+.form_numbers
+  .form-group-nrodoc
+  .form-group-nrodoc-container
+  .form-datos-nrodoc {
+  display: flex;
+  flex-direction: row;
+  column-gap: 5px;
+}
+
+.form-group-nrodoc .form-group-nrodoc-container select {
+  border: 2px solid #c41c1a;
+  border-radius: 10px;
+  padding: 2%;
+  width: 30%;
+}
+
+.form-group-nrodoc .form-group-nrodoc-container input {
+  width: 70%;
+}
+
+.form_direccion {
+  display: flex;
+  flex-direction: column;
+}
+.form_correo {
+  display: flex;
+  flex-direction: column;
+}
+.form_password {
+  display: flex;
+  flex-flow: row nowrap;
+  margin-bottom: 10px;
+}
+
+.form-group.pwd1 {
+  flex: 1 1 50%;
+  padding-right: 5px;
+}
+.form-group.pwd2 {
+  flex: 1 1 50%;
+  padding-left: 5px;
+}
+.form_button{
+  display:  flex;
+  flex-flow: column;
+  margin-bottom: 10px;
+}
+
+.form_button  #btnGraba {
+
+  margin-right: 10px;;
+}
+
+
+.form_button_login{
+  display:  flex;
+  flex-flow: column;
+  margin-bottom: 10px;
+  row-gap: 8px;
+}
+.form_button_login button {
+  flex: 1 1 100%;
+  padding : 10px !important;
+}
+
+@media (max-width: 700px) {
+  .form_lastname {
+    flex-flow: column nowrap;
+  }
+  .form_numbers {
+    flex-flow: column;
+  }
+  .form_password {
+    flex-flow: column;
+  }
+  .form_button{
+  
+    flex-flow: column;
+  }
+  .form_button button{
+    flex-flow: column;
+    flex : 1 1 100%;
+  }
+  .form_button  #btnGraba {
+    margin-right: 0px;
+    margin-bottom: 10px;
+  }
+}
