@@ -1,6 +1,7 @@
 let EsValido = false;
 let show_password = false;
-
+let show_password1 = false;
+let show_password2 = false;
 let mostrar_password = () => {
 	let icono_eye = $(".input-group-addon i");
 	let password = $("#txtPwd");
@@ -15,6 +16,41 @@ let mostrar_password = () => {
 		password.attr('type', 'password');
 	}
 };
+
+
+let mostrar_password_register = () => {
+	let icono_eye = $(".input-group-addon i.register");
+	let password = $("#txtPWD1");
+	show_password1 = !show_password1;
+	if (show_password1) {
+		icono_eye.removeClass("fa fa-eye-slash");
+		icono_eye.addClass("fa fa-eye");
+		password.attr('type', 'text');
+	} else {
+		icono_eye.removeClass("fa fa-eye");
+		icono_eye.addClass("fa fa-eye-slash");
+		password.attr('type', 'password');
+	}
+};
+
+let mostrar_password_confirm = () => {
+	let icono_eye = $(".input-group-addon i.confirm");
+	let password = $("#txtPWD2");
+	show_password2 = !show_password2;
+	if (show_password2) {
+		icono_eye.removeClass("fa fa-eye-slash");
+		icono_eye.addClass("fa fa-eye");
+		password.attr('type', 'text');
+	} else {
+		icono_eye.removeClass("fa fa-eye");
+		icono_eye.addClass("fa fa-eye-slash");
+		password.attr('type', 'password');
+	}
+};
+
+
+
+
 let IniciaSesion = async (usuario, pwd, fn) => {
 	let data = {
 		'email': usuario,
@@ -87,12 +123,10 @@ let inicia = () => {
 	$('#txtCelularUsuario').val('');
 	$('#txtDireccionUsuario').val('');
 	$('#txtEmail').val('');
-	$('#txtPwd1').val('');
-	$('#txtPwd2').val('');
-
+	$('#txtPWD1').val('');
+	$('#txtPWD2').val('');
 	$('#txtUsuario').removeClass("invalido");
 	$('#txtPwd').removeClass("invalido");
-
 	$('#txtNombre').removeClass("invalido");
 	$('#txtApPaterno').removeClass("invalido");
 	$('#cboTipdoc').removeClass("invalido");
@@ -100,8 +134,8 @@ let inicia = () => {
 	$('#txtCelularUsuario').removeClass("invalido");
 	$('#txtDireccionUsuario').removeClass("invalido");
 	$('#txtEmail').removeClass("invalido");
-	$('#txtPwd1').removeClass("invalido");
-	$('#txtPwd2').removeClass("invalido");
+	$('#txtPWD1').removeClass("invalido");
+	$('#txtPWD2').removeClass("invalido");
 }
 let ClearValidLogin = () => {
 	$('#txtUsuario').removeClass("invalido");
@@ -116,8 +150,8 @@ let ClearValidRegistro = () => {
 	$('#txtCelularUsuario').removeClass("invalido");
 	$('#txtDireccionUsuario').removeClass("invalido");
 	$('#txtEmail').removeClass("invalido");
-	$('#txtPwd1').removeClass("invalido");
-	$('#txtPwd2').removeClass("invalido");
+	$('#txtPWD1').removeClass("invalido");
+	$('#txtPWD2').removeClass("invalido");
 
 }
 
@@ -184,11 +218,12 @@ $(document).ready(() => {
 	// Función para abrir el modal
 	$('#btnLogIn').on('click', function () {
 		let modal = $('#loginModal');
+		const html = document.querySelector("html");
+		html.style.overflowY =  "auto";
 		if (Object.keys(modal).length === 0) {
 			$('.lista_sesion').toggle();
-
-
 		} else {
+			html.style.overflowY =  "hidden";
 			$('#loginModal').css('display', 'block');
 		}
 
@@ -196,7 +231,8 @@ $(document).ready(() => {
 	});
 	// Función para cerrar el modal 
 	$('#closeLoginModal').on('click', function () {
-
+		const html = document.querySelector("html");
+		html.style.overflowY =  "auto";
 		$('#loginModal').css('display', 'none');
 		inicia();
 	});
@@ -208,7 +244,8 @@ $(document).ready(() => {
 	});
 	// Función para cerrar el modal de registro
 	$('#closeRegisterModal').on('click', function () {
-
+		const html = document.querySelector("html");
+		html.style.overflowY =  "auto";
 		$('#registerModal').css('display', 'none');
 		inicia();
 
@@ -233,6 +270,7 @@ $(document).ready(() => {
 	$('#cboTipdoc').on('change', function () {
 		let tipdoc = $(this).val();
 		let nrodoc = $("#txtNroDoc");
+		$("#txtNroDoc").val('');
 		if (tipdoc == "2") {
 			nrodoc.attr("maxlength", 8);
 		} else if (tipdoc == "4") {

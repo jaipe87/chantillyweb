@@ -107,7 +107,12 @@
 <script src="{$asset}/js/lib/alertify/alertify.min.js"></script>
 <script src="{$asset}/js/util.js?v={0|rand:100}"></script>
 <script src="{$asset}/js/main.js?v={0|rand:100}"></script>
+
+
 <script src="{$asset}/js/form/login.js?v={0|rand:100}"></script>
+
+
+
 <script src="{$asset}/js/chantillyjs/sticky-chat.js?v={0|rand:100}"></script>
 {block name="scripts"}
 

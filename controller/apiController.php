@@ -3,12 +3,17 @@ class apiController
 {
 
     private $DB = null;
-
-
+    private $auth = null;
+    private $msgToken = "";
     public function __construct($arrParam)
     {
+
+        ob_start();
         $this->DB = $arrParam["DB"];
+        $this->auth = AuthFactory::getInstance();
+        $this->msgToken = "No ha iniciado Sesión o su Sesión ha expirado";
         Session::init();
+        ob_get_clean();
     }
 
     public function select_all_tipdoc()
@@ -127,6 +132,62 @@ class apiController
             }
         } catch (Exception $e) {
             die($e->getMessage());
+        }
+    }
+
+    public function  consulta_ruc($ruc)
+    {
+        header('Content-Type: application/json');
+        $token = Session::get("access_token");
+
+        try {
+
+            if ($token) {
+
+                $cliente = $this->auth->Decode($token);
+
+                if ($cliente) {
+                    $daoUsuario = new daoUsuario($this->DB);
+                    $id_usuario = $cliente->id_usuario;
+                    $oUsuario = $daoUsuario->GetUsuario(["id_usuario" => $id_usuario]);
+                    if ($oUsuario) {
+                        $url = "http://www.amkdelivery.com/Reniec/consultaSunatJSON.php?ruc=$ruc";
+                        $header = [
+                            'Accept: application/json',
+                            'Content-Type: "application/json; charset=UTF-8'
+                        ];
+                        $response = Curl::sendGet($header, $url);
+                        $result = [];
+                        if (!isset($response) || $response["StatusCode"] == HTTP_CODE_NO_AUTORIZADO) {
+                            echo json_encode(["success" => false, "data" => [], "msg" => "Acceso no autorizado"], JSON_PRETTY_PRINT);
+                            return;
+                        } else {
+                            $result = json_decode($response["data"], true);
+                            if (is_array($result)) {
+                                echo json_encode(["success" => true, "data" => $result, "msg" => ""], JSON_PRETTY_PRINT);
+                                return;
+                            } else {
+                                echo json_encode(["success" => false, "data" => [], "msg" => $result], JSON_PRETTY_PRINT);
+                                return;
+                            }
+                        }
+                    } else {
+                        echo json_encode(["success" => false, "data" => [], "msg" => "Acceso no autorizado"], JSON_PRETTY_PRINT);
+                        return;
+                    }
+                } else {
+                    echo json_encode(["success" => false, "data" => [], "msg" => "Acceso no autorizado"], JSON_PRETTY_PRINT);
+                    return;
+                }
+            } else {
+                echo json_encode(["success" => false, "data" => [], "msg" => $this->msgToken], JSON_PRETTY_PRINT);
+                return;
+            }
+        } catch (Exception $e) {
+            Session::close();
+            addCookie("msg", $this->msgToken);
+            header('Location: ' . RUTA_HTTP);
+            die();
         }
     }
 }

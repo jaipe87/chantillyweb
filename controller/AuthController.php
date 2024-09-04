@@ -6,12 +6,13 @@ class AuthController
     private $DB = null;
     private $auth = null;
     private $cia = 1;
+    private $msgToken = "";
     public function __construct($arrParam)
     {
         ob_start();
         $this->DB = $arrParam["DB"];
         $this->auth =  AuthFactory::getInstance();
-       
+        $this->msgToken = "No ha iniciado Sesión o su Sesión ha expirado";
         Session::init();
         ob_get_clean();
     }
@@ -134,7 +135,7 @@ class AuthController
                         return;
                     }
 
-                    if ($tipdoc == "0") {
+                    /*   if ($tipdoc == "0") {
                         $msg = "Ingrese su Tipo de documento";
                         echo json_encode(['success' => false, 'input' => 'tipdoc', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
                         return;
@@ -166,12 +167,11 @@ class AuthController
                             }
                         }
                     }
-
-                    if ($nrodoc == "") {
+                     if ($nrodoc == "") {
                         $msg = "Ingrese su N° de documento";
                         echo json_encode(['success' => false, 'input' => 'nrodoc', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
                         return;
-                    }
+                    }*/
 
 
                     if ($celular  == "") {
@@ -200,11 +200,11 @@ class AuthController
                         }
                     }
 
-                    if ($direccion  == "") {
+                    /*  if ($direccion  == "") {
                         $msg = "Ingrese su dirección ";
                         echo json_encode(['success' => false, 'input' => 'direccion', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
                         return;
-                    }
+                    }*/
                     if ($pwd1  == "") {
                         $msg = "Ingrese su contraseña ";
                         echo json_encode(['success' => false, 'input' => 'pwd1', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
@@ -223,6 +223,7 @@ class AuthController
                     }
 
                     $Param = [
+                        'modo' =>'0',
                         'id_usuario' => "",
                         'nombres' => $nombres,
                         'apellidos' => $apellidos,
@@ -273,6 +274,210 @@ class AuthController
             die($e->getMessage());
         }
     }
+    public function registra_cliente_cuenta()
+    {
+
+
+        header('Content-Type: application/json');
+        try {
+
+
+
+
+
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+                $token = Session::get("access_token");
+                if (!$token) {
+                    Session::close();
+                    addCookie("msg", $this->msgToken);
+                    header('Location: ' . RUTA_HTTP);
+                    die();
+                }
+                $cliente = $this->auth->Decode($token);
+                if (!$cliente) {
+                    Session::close();
+                    addCookie("msg", $this->msgToken);
+                    header('Location: ' . RUTA_HTTP);
+                    die();
+                }
+
+                $daoUsuario = new daoUsuario($this->DB);
+                $id_usuario = $cliente->id_usuario;
+                $oUsuario = $daoUsuario->GetUsuario(["id_usuario" => $id_usuario]);
+
+                $id_usuario = $oUsuario->id_usuario;
+                $id_estado  = $oUsuario->id_estado;
+                $id_google = $oUsuario->id_google;
+                $verifiedEmail =  $oUsuario->verifiedEmail;
+
+                $json = json_decode(file_get_contents('php://input'), true);
+
+                if (isset($json)) {
+                    $nombres = (!isset($json['nombres']) ? "" : $json['nombres']);
+                    $apellidos = (!isset($json['apellidos']) ? "" : $json['apellidos']);
+                    $tipdoc = (!isset($json['tipdoc']) ? '0' : $json['tipdoc']);
+                    $nrodoc = (!isset($json['nrodoc']) ? "" : $json['nrodoc']);
+                    $celular = (!isset($json['celular']) ? "" : $json['celular']);
+                    $email = (!isset($json['email']) ? "" : $json['email']);
+                    $direccion = (!isset($json['direccion']) ? "" : $json['direccion']);
+                    $pwd1 = (!isset($json['pwd1']) ? "" : $json['pwd1']);
+                    $pwd2 = (!isset($json['pwd2']) ? "" : $json['pwd2']);
+
+
+                    if ($nombres == "") {
+                        $msg = "Ingrese sus nombres";
+                        echo json_encode(['success' => false, 'input' => "nombres", 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                        return;
+                    }
+                    if ($apellidos == "") {
+                        $msg = "Ingrese sus Apellidos";
+                        echo json_encode(['success' => false, 'input' => 'apellidos', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                        return;
+                    }
+
+                    /*   if ($tipdoc == "0") {
+                        $msg = "Ingrese su Tipo de documento";
+                        echo json_encode(['success' => false, 'input' => 'tipdoc', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                        return;
+                    } else {
+
+                        if ($tipdoc == "2") {
+                            if (strlen($nrodoc) != 8) {
+                                $msg = "Ha seleccionado DNI, debe tener 8 dígitos";
+                                echo json_encode(['success' => false, 'input' => 'nrodoc', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                                return;
+                            }
+                        } elseif ($tipdoc == "4") {
+                            if (strlen($nrodoc) != 12) {
+                                $msg = "Ha seleccionado CARNET DE EXTRANJERIA, debe tener 12 dígitos";
+                                echo json_encode(['success' => false, 'input' => 'nrodoc', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                                return;
+                            }
+                        } elseif ($tipdoc == "7") {
+                            if (strlen($nrodoc) != 12) {
+                                $msg = "Ha seleccionado PASAPORTE, debe tener 12 dígitos";
+                                echo json_encode(['success' => false, 'input' => 'nrodoc', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                                return;
+                            }
+                        } elseif ($tipdoc == "23") {
+                            if (strlen($nrodoc) != 9) {
+                                $msg = "Ha seleccionado CARNET PTP, debe tener 9 dígitos";
+                                echo json_encode(['success' => false, 'input' => 'nrodoc', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                                return;
+                            }
+                        }
+                    }
+                     if ($nrodoc == "") {
+                        $msg = "Ingrese su N° de documento";
+                        echo json_encode(['success' => false, 'input' => 'nrodoc', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                        return;
+                    }*/
+
+
+                    if ($celular  == "") {
+                        $msg = "Ingrese su Número de Celular";
+                        echo json_encode(['success' => false, 'input' => 'celular', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                        return;
+                    } else {
+                        if (strlen($celular) < 9 || strlen($celular) > 11) {
+                            $msg = "Ingrese un Número de Celular correcto";
+                            echo json_encode(['success' => false, 'input' => 'celular', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                            return;
+                        }
+                    }
+                    if ($email  == "") {
+                        $msg = "Ingrese su correo electrónico";
+                        echo json_encode(['success' => false, 'input' => 'email', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                        return;
+                    } else {
+
+                        $pattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/";
+
+                        if (!preg_match($pattern, $email)) {
+                            $msg = "Ingrese un formato correo electrónico correcto";
+                            echo json_encode(['success' => false, 'input' => 'email', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                            return;
+                        }
+                    }
+
+                    /*  if ($direccion  == "") {
+                        $msg = "Ingrese su dirección ";
+                        echo json_encode(['success' => false, 'input' => 'direccion', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                        return;
+                    }*/
+                    /*    if ($pwd1  == "") {
+                        $msg = "Ingrese su contraseña ";
+                        echo json_encode(['success' => false, 'input' => 'pwd1', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                        return;
+                    }
+                    if ($pwd2  == "") {
+                        $msg = "Repita su contraseña ";
+                        echo json_encode(['success' => false, 'input' => 'pwd2', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                        return;
+                    }
+                  */
+                    if ($pwd1  != $pwd2) {
+                        $msg = "La segunda contraseña debe ser igual la primera para completar la validación ";
+                        echo json_encode(['success' => false, 'input' => 'pwd2', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
+                        return;
+                    }
+
+                    $Param = [
+                        'modo' =>'1',
+                        'id_usuario' => $id_usuario,
+                        'nombres' => $nombres,
+                        'apellidos' => $apellidos,
+                        'tipdoc' => $tipdoc,
+                        'nrodoc' => $nrodoc,
+                        'celular' => $celular,
+                        'email' => $email,
+                        'direccion' => $direccion,
+                        'pwd1' => $pwd1,
+                        'pwd2' => $pwd2,
+                        "id_estado" => $id_estado,
+                        "id_google" => $id_google,
+                        "verifiedEmail" => $verifiedEmail
+                    ];
+
+                
+
+                    $odaoUsuario =  new daoUsuario($this->DB);
+                    $oUsuario = new Usuario();
+                    $oUsuario =   $odaoUsuario->RegistraUsuario($Param);
+
+                    if (is_object($oUsuario)) {
+                        echo json_encode(['success' => true, 'msg' => 'Actualización exitosa !!'], JSON_UNESCAPED_UNICODE);
+                    } else {
+                        if ($oUsuario == 0) {
+                            $msg = "Hubo un Error por parte de nosotros No procedió tu actualización !!";
+                        } elseif ($oUsuario == 2) {
+                            $msg = "El correo que intenta registrar, ya existe !! ";
+                        } elseif ($oUsuario == 3) {
+                            $msg = "El N° de documento de identidad ya existe !!";
+                        }
+                        echo json_encode([
+                            'success' => false,
+                            'msg' => $msg
+                        ], JSON_UNESCAPED_UNICODE);
+                        return;
+                    }
+                } else {
+
+                    header('Location: ' . RUTA_HTTP);
+                    die();
+                }
+            } else {
+                header('Location: ' . RUTA_HTTP);
+                die();
+            }
+        } catch (Exception $e) {
+            Session::close();
+            addCookie("msg", $this->msgToken);
+            header('Location: ' . RUTA_HTTP);
+            die();
+        }
+    }
 
     public function registra_cliente_google($code)
     {
@@ -319,7 +524,7 @@ class AuthController
                 'id_usuario' => "",
                 'nombres' => $givenName,
                 'apellidos' => $familyName,
-                'tipdoc' => "0",
+                'tipdoc' => "2",
                 'nrodoc' => "",
                 'celular' => "",
                 'email' => $email,
@@ -421,9 +626,9 @@ class AuthController
             $email_user =  $user_email;
             $titulo = "Reseteo de Contraseña";
             $mensaje =  $html;
-    
 
-            $config =[
+
+            $config = [
                 "host" =>  $host,
                 "user" => $username,
                 "pwd" => $password,
@@ -433,8 +638,8 @@ class AuthController
                 "mailRec" => $email_user,
                 "titulo" => $titulo,
                 "mensaje" => $mensaje
-            ] ;
-        
+            ];
+
             $PhpMailer = MailerGFactory::crearMailer($config, $encript);
 
             $enviado =  $PhpMailer->Send();
@@ -480,7 +685,7 @@ class AuthController
             $client->revokeToken($token_google);
         }
         Session::close();
-        addCookie("msg",$msg);
+        addCookie("msg", $msg);
         header('Location: ' . RUTA_HTTP);
     }
 }

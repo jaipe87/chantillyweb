@@ -269,6 +269,53 @@ h3 {
 .form_cliente .datos_cliente .form_control select {
   flex: 1 1 0%;
 }
+
+
+
+
+.form_facturacion .datos_facturacion {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.form_facturacion .datos_facturacion .form_control {
+  display: flex;
+  flex-flow: column nowrap;
+  column-gap: 5px;
+}
+
+.form_facturacion .datos_facturacion .form_control .radios {
+  display: flex;
+  flex-flow: row wrap;
+  column-gap: 5px;
+  justify-content: space-around;
+  margin-bottom: 10px;
+}
+.form_facturacion .input_group {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.input_group input[name='ruc']{
+  flex: 1 1 95%;
+}
+.input_group button.sunat{
+  flex: 1 1 5%;
+  margin: 5px 0px;
+  border-radius: 0px;
+}
+
+.form_facturacion .datos_facturacion .form_control input,
+.form_facturacion .datos_facturacion .form_control select {
+  flex: 1 1 0%;
+}
+
+.form_facturacion .datos_facturacion .form_control label input[type="radio"] {
+  margin: 5px;
+}
+.ruc_detalle{
+  display: none;
+}
+
 .form_entrega .datos_tipo_entrega {
   display: flex;
   flex-flow: column nowrap;
@@ -318,6 +365,10 @@ h3 {
 #delivery .delivery_detalle .datos_delivery .form_control select {
   flex: 1 1 0%;
 }
+
+
+
+
 
 /** Tabla de compras **/
 .table {

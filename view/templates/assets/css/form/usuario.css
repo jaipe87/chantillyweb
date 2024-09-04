@@ -1,27 +1,22 @@
+.info_usuario {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
 
-
-.thead-center{
-    text-align: center;
-}
-
-.pre-style{
-     font-family: "Open Sans", sans-serif;
-     font-size: 16px;
-     margin: 0;
-     font-weight: 700;
- }
-.sub-pre-style{
-    font-family: "Open Sans", sans-serif;
-    font-size: 15px;
-    margin: 0;
-}
-.list_permisos{
-    margin-left:50px;
-}
-
-.input-group-addon{
-    border-radius: 0 .25rem .25rem 0 !important;
-    border-left: 0px;
-    cursor: pointer;
   }
   
+  .row_buttons{
+    flex-flow: row wrap !important;
+    gap: 10px;
+     justify-content: space-between;
+  }
+  .usuario_select{
+    padding: 0px !important;
+    text-align: center !important;
+  }

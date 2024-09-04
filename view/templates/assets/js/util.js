@@ -569,61 +569,6 @@ function autocomplete(inp, arr) {
   });
 }
 
-var ConsultaSunat = async (nroRuc, fn) => {
-  let url = new URL(
-    "http://www.hsperu.pe/Reniec/consultaSunatJSON.php?ruc=" + nroRuc
-  );
-
-  const dataRequest = {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-    },
-  };
-
-  msg.Notifica("Consultando...");
-
-  await fetch(url, dataRequest)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      return fn(data);
-    })
-    .catch(function (err) {
-      console.error(err);
-    });
-
-  return false;
-};
-var ConsultaReniec = async (nroDni, fn) => {
-  let url = new URL(
-    "http://www.hsperu.pe/Reniec/consultaReniecJSON.php?dni=" + nroDni
-  );
-
-  const dataRequest = {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-    },
-  };
-
-  msg.Notifica("Consultando...");
-
-  await fetch(url, dataRequest)
-    .then((res) => {
-      return res.json();
-    })
-    .then((data) => {
-      return fn(data);
-    })
-    .catch(function (err) {
-      console.error(err);
-    });
-
-  return false;
-};
-
 function formatNumber(numero) {
   let opciones = {
     style: "decimal",

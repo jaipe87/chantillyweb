@@ -289,6 +289,25 @@ let entregaDiv = (entrega) => {
         document.getElementById('delivery').style.display = 'block';
     }
 }
+let limpiarDatosRuc = () => {
+    $("#ruc").val("");
+    $("#razsoc").val("");
+    $("#domicilio_fiscal").val("");
+    $('#ruc').removeClass("invalido");
+    $('#razsoc').removeClass("invalido");
+    $('#domicilio_fiscal').removeClass("invalido");
+}
+let documentosDiv = (factura) => {
+    limpiarDatosRuc();
+    if (factura == 'factura') {
+        document.getElementById('ruc_detalle').style.display = 'block';
+        $("#ruc").focus();
+    } else {
+        document.getElementById('ruc_detalle').style.display = 'none';
+    }
+
+}
+
 let ClearValidRegistro = () => {
     $('#txtNombre').removeClass("invalido");
     $('#txtApPaterno').removeClass("invalido");
@@ -325,46 +344,53 @@ let Init_cardLocales = (datos) => {
 };
 let ValidaCompra = () => {
 
-   let ubigeopermisos = JSON.parse(localStorage.getItem('permisoGeolocalizacion'));
+    let ubigeopermisos = JSON.parse(localStorage.getItem('permisoGeolocalizacion'));
 
-    if(!ubigeopermisos.success){
+    if (!ubigeopermisos.success) {
         msg.Notifica("Es necesario nos permita acceder a su ubicación, para proseguir, con su compra :) ", "error", "top-right");
         return false;
-    } ;
- 
+    };
+
     let chkTermino = document.getElementById("terms");
     let chkPrivacidad = document.getElementById("privacidad");
     let valida_cliente = $(".form_cliente").attr("data-info");
 
     if (!VALIDACION.CheckVal("txtNombre", "Ingrese sus nombres", 1, 100, false)) return false;
     if (!VALIDACION.CheckVal("txtApPaterno", "Ingrese sus apellidos", 1, 100, false)) return false;
-    if (!VALIDACION.CheckVal("direccion", "Ingrese su dirección", 1, 300, false)) return false;
+    //  if (!VALIDACION.CheckVal("direccion", "Ingrese su dirección", 1, 300, false)) return false;
     if (!VALIDACION.CheckVal("telefono", "Ingrese su teléfono celular", 1, 11, false)) return false;
 
-    const tipdoc = document.getElementById('sltctipodocumento');
+    /* const tipdoc = document.getElementById('sltctipodocumento');
     const valorseleccionado = tipdoc.options[tipdoc.selectedIndex].value;
-
-    if (valorseleccionado == "2") {
-        if (!VALIDACION.CheckVal("txtdocumento", "EL DNI debe tener 8 caracteres", 8, 8, false)) return false;
-    } else if (valorseleccionado == "4") {
-        if (!VALIDACION.CheckVal("txtdocumento", "EL CARNET DE EXTRANJERÍA debe tener 12 caracteres", 12, 12, false)) return false;
-    } else if (valorseleccionado == "7") {
-        if (!VALIDACION.CheckVal("txtdocumento", "EL PASAPORTE debe tener 12 caracteres", 12, 12, false)) return false;
-    } else if (valorseleccionado == "23") {
-        if (!VALIDACION.CheckVal("txtdocumento", "EL CARNET PTP debe tener 9 caracteres", 9, 9, false)) return false;
-    }
-
-    if (!VALIDACION.CheckVal("txtdocumento", "Ingrese su N° de Documento de Identidad", 1, 11, false)) return false;
-
+     
+         if (valorseleccionado == "2") {
+             if (!VALIDACION.CheckVal("txtdocumento", "EL DNI debe tener 8 caracteres", 8, 8, false)) return false;
+         } else if (valorseleccionado == "4") {
+             if (!VALIDACION.CheckVal("txtdocumento", "EL CARNET DE EXTRANJERÍA debe tener 12 caracteres", 12, 12, false)) return false;
+         } else if (valorseleccionado == "7") {
+             if (!VALIDACION.CheckVal("txtdocumento", "EL PASAPORTE debe tener 12 caracteres", 12, 12, false)) return false;
+         } else if (valorseleccionado == "23") {
+             if (!VALIDACION.CheckVal("txtdocumento", "EL CARNET PTP debe tener 9 caracteres", 9, 9, false)) return false;
+         }
+         if (!VALIDACION.CheckVal("txtdocumento", "Ingrese su N° de Documento de Identidad", 1, 11, false)) return false;
+     */
     if (valida_cliente == 0) {
-
         msg.Notifica("No ha confirmado sus datos de cliente", "error", "top-right");
         return false;
     }
 
+    let factura = document.getElementById("factura");
+
+    if (factura.checked) {
+        if (!VALIDACION.CheckVal("ruc", "Ingrese el RUC correcto (11  dígitos)", 11, 11, false)) return false;
+        if (!VALIDACION.CheckVal("razsoc", "Ingrese su Razón Social", 1, 300, false)) return false;
+        if (!VALIDACION.CheckVal("domicilio_fiscal", "Ingrese su domicilio fiscal", 1, 300, false)) return false;
+
+    }
+
+
     let recojoRadio = document.getElementById("recojoRadio");
     let deliveryRadio = document.getElementById("deliveryRadio") || undefined;
-
 
     if (recojoRadio.checked) {
         let id_local = $("#idlocal").val();
@@ -448,6 +474,9 @@ let ClickOrderButtonNz = async () => {
     let terminos = document.getElementById("terms");
     let privacidad = document.getElementById("privacidad");
 
+    let boleta = document.getElementById("boleta");
+    let factura = document.getElementById("factura");
+
     if (TipoEntrega == 0) {
 
         data_form = {
@@ -462,7 +491,11 @@ let ClickOrderButtonNz = async () => {
             "longitud": coordenadas.longitud,
             "total": 0.00,
             "stterminos": (terminos.checked ? 1 : 0),
-            "stprivacidad": (privacidad.checked ? 1 : 0)
+            "stprivacidad": (privacidad.checked ? 1 : 0),
+            "tipdocventa": (boleta.checked ? 3 : (factura.checked ? 1 : 0)),
+            "ruc": (boleta.checked ? "" : $("#ruc").val()),
+            "razsoc": (boleta.checked ? "" : $("#razsoc").val()),
+            "dirfiscal": (boleta.checked ? "" : $("#domicilio_fiscal").val()),
         };
 
     } else {
@@ -478,7 +511,11 @@ let ClickOrderButtonNz = async () => {
             "longitud": coordenadas.longitud,
             "total": 0.00,
             "stterminos": (terminos.checked ? 1 : 0),
-            "stprivacidad": (privacidad.checked ? 1 : 0)
+            "stprivacidad": (privacidad.checked ? 1 : 0),
+            "tipdocventa": (boleta.checked ? 3 : (factura.checked ? 1 : 0)),
+            "ruc": (boleta.checked ? "" : $("#ruc").val()),
+            "razsoc": (boleta.checked ? "" : $("#razsoc").val()),
+            "dirfiscal": (boleta.checked ? "" : $("#domicilio_fiscal").val()),
         };
 
     }
@@ -588,6 +625,35 @@ let actualizacliente = () => {
         }
     });
 }
+let ConsultaRuc = async (ruc, fn) => {
+
+    let url = new URL(urlpath + "/api/consulta_ruc/" + ruc);
+    const dataRequest = {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json; charset=UTF-8",
+        },
+    };
+
+
+    try {
+        const response = await fetch(url, dataRequest);
+        const resultado = await response.json();
+
+        if (resultado.success) {
+            fn(resultado.data);
+        } else {
+            $("#ruc").val("");
+            $("#razsoc").val("");
+            $("#domicilio_fiscal").val("");
+            msg.Notifica(resultado.msg, 'error', 'top-right');
+        }
+    } catch (err) {
+        console.error(err);
+    }
+
+}
 $(document).ready(() => {
 
     (async function () {
@@ -603,6 +669,7 @@ $(document).ready(() => {
     $(".jm-loadingpage").fadeOut(2500);
     $('#sltcDepartamento').val("0");
     entregaDiv('recojo-tienda');
+    documentosDiv('boleta');
     $('#sltctipodocumento').on('change', () => {
         let tipdoc = $("#sltctipodocumento").val();
         let nrodoc = $("#txtdocumento");
@@ -653,9 +720,12 @@ $(document).ready(() => {
         entregaDiv('delivery');
     });
 
-
-
-
+    $("#boleta").on('click', () => {
+        documentosDiv('boleta');
+    });
+    $("#factura").on('click', () => {
+        documentosDiv('factura');
+    });
     $("#terms").on("click", () => {
         configButton();
     });
@@ -663,7 +733,18 @@ $(document).ready(() => {
         configButton();
     });
 
+    $("#btnsunat").on("click", () => {
+        let ruc = $("#ruc").val();
+        if (!VALIDACION.CheckVal("ruc", "Ingrese el RUC correcto (11  dígitos)", 11, 11, false)) return false;
+        $(".jm-cargaTemp").fadeIn(500);
+        ConsultaRuc(ruc, (e) => {
 
+            $("#ruc").val(e.ruc);
+            $("#razsoc").val(e.razonSocial);
+            $("#domicilio_fiscal").val(e.direccion);
+        })
+        $(".jm-cargaTemp").fadeOut(500);
+    });
 
 });
 

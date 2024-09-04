@@ -25,6 +25,10 @@ class Pedido
     public $latitud = 0.00;
     public $longitud = 0.00;
     public $st = 0;
+    public $docventa=0;
+    public $ruc= "";
+    public $razsoc ="";
+    public $dirfiscal ="";
     public $detalle = [];
     public $created_at = "0000-00-00 00:00:00";
     public $updated_at = "0000-00-00 00:00:00";

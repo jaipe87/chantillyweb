@@ -68,7 +68,7 @@
                         </a>
                         <ul class="lista_sesion">
 
-                            <li class="lista_sesion_li"> <a class="link_sesion" href="#"> <i class="fa fa-user"></i> Mi
+                            <li class="lista_sesion_li"> <a class="link_sesion" href="{$RUTA_HTTP}/Cuenta"> <i class="fa fa-user"></i> Mi
                                     Cuenta</a> </li>
                             <li class="lista_sesion_li"> <a class="link_sesion" href="{$RUTA_HTTP}/Auth/LogOut"><i
                                         class="fa-solid fa-up-right-from-square "></i> Cerrar Sesión</a></li>
@@ -215,14 +215,14 @@
                                 <div class="login-form">
                                     <form autocomplete="false">
                                         <div class="form-group">
-                                            <label>Nombres</label>
+                                            <label>Nombres <small>(Obligatorio)</small></label>
                                             <input type="text" required autocomplete="off" name="nombres"
                                                 class="form-control text-uppercase" placeholder="Ingrese su(s) Nombre(s)"
                                                 id="txtNombre" maxlength="100">
                                         </div>
                                         <div class="form_lastname">
                                             <div class="form-group">
-                                                <label for="txtApPaterno">Apellidos</label>
+                                                <label for="txtApPaterno">Apellidos <small>(Obligatorio)</small></label>
                                                 <input type="text" required autocomplete="off" name="apellidos"
                                                     class="form-control text-uppercase" placeholder="Ingrese sus Apellidos"
                                                     id="txtApPaterno" maxlength="100">
@@ -250,7 +250,7 @@
                                             </div>
 
                                             <div class="form-group-celular">
-                                                <label>Nro. Celular</label>
+                                                <label>Nro. Celular <small>(Obligatorio)</small></label>
                                                 <input type="text" required autocomplete="off" name="celular"
                                                     class="form-control text-uppercase" placeholder="Ingrese su Celular"
                                                     id="txtCelularUsuario" maxlength="11">
@@ -258,7 +258,7 @@
                                         </div>
                                         <div style="form_correo">
                                             <div class="form-group">
-                                                <label>Correo Electrónico</label>
+                                                <label>Correo Electrónico <small>(Obligatorio)</small> </label>
                                                 <input type="text" required autocomplete="off" class="form-control"
                                                     placeholder="Ingrese su correo electrónico" id="txtEmail" name="email"
                                                     maxlength="150">
@@ -282,7 +282,7 @@
                                                         name="pwd1" autocomplete="off">
                                                     <div class="input-group-addon input-group-register"
                                                         onclick="mostrar_password_register()">
-                                                        <i class="fa fa-eye-slash"></i>
+                                                        <i class="fa fa-eye-slash register"></i>
                                                     </div>
                                                 </div>
                                             </div>
@@ -295,7 +295,7 @@
                                                         name="pwd2" autocomplete="off">
                                                     <div class="input-group-addon input-group-confirm"
                                                         onclick="mostrar_password_confirm()">
-                                                        <i class="fa fa-eye-slash"></i>
+                                                        <i class="fa fa-eye-slash confirm"></i>
                                                     </div>
                                                 </div>
                                             </div>

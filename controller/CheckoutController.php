@@ -179,13 +179,14 @@ class CheckoutController
                         echo json_encode(['success' => false, 'input' => 'apellidos', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
                         return;
                     }
-                    if ($direccion  == "") {
+                   
+                   /* if ($direccion  == "") {
                         $msg = "Ingrese su dirección ";
                         echo json_encode(['success' => false, 'input' => 'direccion', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
                         return;
-                    }
+                    }*/
 
-                    if ($tipdoc == "0") {
+                  /*  if ($tipdoc == "0") {
                         $msg = "Ingrese su Tipo de documento";
                         echo json_encode(['success' => false, 'input' => 'tipdoc', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
                         return;
@@ -216,14 +217,14 @@ class CheckoutController
                                 return;
                             }
                         }
-                    }
+                    }*/
 
-                    if ($nrodoc == "") {
+                  /*  if ($nrodoc == "") {
                         $msg = "Ingrese su N° de documento";
                         echo json_encode(['success' => false, 'input' => 'nrodoc', 'msg' => $msg], JSON_UNESCAPED_UNICODE);
                         return;
                     }
-
+*/
 
                     if ($celular  == "") {
                         $msg = "Ingrese su Número de Celular";
@@ -255,9 +256,15 @@ class CheckoutController
                     if (is_object($oUsuario)) {
                         echo json_encode(['success' => true, 'msg' => 'Actualizaste tus datos correctamente !!'], JSON_UNESCAPED_UNICODE);
                     } else {
+                      
                         if ($oUsuario == 0) {
-                            $msg = "Hubo un Error por parte de nosotros No procedió su actualización !!";
+                            $msg = "Hubo un Error por parte de nosotros No procedió tu actualización !!";
+                        } elseif ($oUsuario == 2) {
+                            $msg = "El correo que intenta registrar, ya existe !! ";
+                        } elseif ($oUsuario == 3) {
+                            $msg = "El N° de documento de identidad ya existe !!";
                         }
+
                         echo json_encode([
                             'success' => false,
                             'msg' => $msg
@@ -791,6 +798,10 @@ class CheckoutController
                                 "latitud" => $data["latitud"],
                                 "longitud" => $data["longitud"],
                                 "detalle" => $detalle,
+                                "tipdocventa" => $data["tipdocventa"],
+                                "ruc" => $data["ruc"],
+                                "razsoc" =>$data["razsoc"],
+                                "dirfiscal"=>$data["dirfiscal"]
 
                             ];
 

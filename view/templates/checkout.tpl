@@ -70,12 +70,22 @@
                         <div class="form_cliente" data-info="{$cliente->verified_checkout}">
 
                             <div class="datos_cliente">
+                                <h4 style="margin-bottom: 10px;font-size: 14px;">Solicitamos unicamente la información
+                                    esencial para la finalización de la compra </h4>
                                 <div class="form_control">
                                     <div class="control">
-                                        <label for="">Nombres</label>
+                                        <label for="">Nombres <small>(Obligatorio)</small> </label>
                                         {if $cliente->verified_checkout==0}
-                                            <input type="text" id="txtNombre" name="nombres" placeholder="Nombre" required
-                                                value="{$cliente->nom_usuario}" />
+
+                                            {if $cliente->id_google!='' && $cliente->verifiedEmail== 1  }
+                                                <input type="text" id="txtNombre" name="nombres" placeholder="Nombre" required
+                                                    value="" />
+                                            {else}
+                                                <input type="text" id="txtNombre" name="nombres" placeholder="Nombre" required
+                                                    value="{$cliente->nom_usuario}" />
+
+                                            {/if}
+
                                         {else}
                                             <input type="text" id="txtNombre" name="nombres" placeholder="Nombre" required
                                                 value="{$cliente->nom_usuario}" disabled />
@@ -84,10 +94,15 @@
                                     </div>
 
                                     <div class="control">
-                                        <label for="">Apellidos</label>
+                                        <label for="">Apellidos <small>(Obligatorio)</small> </label>
                                         {if $cliente->verified_checkout==0}
-                                            <input type="text" id="txtApPaterno" name="apellidos" placeholder="Apellidos"
-                                                value="{$cliente->ape_usuario}" required />
+                                            {if $cliente->id_google!='' && $cliente->verifiedEmail== 1  }
+                                                <input type="text" id="txtApPaterno" name="apellidos" placeholder="Apellidos"
+                                                    value="" required />
+                                            {else}
+                                                <input type="text" id="txtApPaterno" name="apellidos" placeholder="Apellidos"
+                                                    value="{$cliente->ape_usuario}" required />
+                                            {/if}
                                         {else}
                                             <input type="text" id="txtApPaterno" name="apellidos" placeholder="Apellidos"
                                                 value="{$cliente->ape_usuario}" required disabled />
@@ -98,10 +113,14 @@
                                 <div class="form_control">
                                     <div class="control">
                                         <label for="">Dirección</label>
-
                                         {if $cliente->verified_checkout==0}
-                                            <input type="text" id="direccion" name="direccion"
-                                                value="{$cliente->direc_usuario}" placeholder="Dirección" required />
+                                            {if $cliente->id_google!='' && $cliente->verifiedEmail== 1  }
+                                                <input type="text" id="direccion" name="direccion" value=""
+                                                    placeholder="Dirección" required />
+                                            {else}
+                                                <input type="text" id="direccion" name="direccion"
+                                                    value="{$cliente->direc_usuario}" placeholder="Dirección" required />
+                                            {/if}
                                         {else}
                                             <input type="text" id="direccion" name="direccion"
                                                 value="{$cliente->direc_usuario}" placeholder="Dirección" required
@@ -112,11 +131,17 @@
 
                                     </div>
                                     <div class="control">
-                                        <label for="">Celular</label>
+                                        <label for="">Celular <small>(Obligatorio)</small> </label>
 
                                         {if $cliente->verified_checkout==0}
-                                            <input type="tel" id="telefono" name="celular" value="{$cliente->cel_usuario}"
-                                                placeholder="Teléfono" maxlength="11" required />
+                                            {if $cliente->id_google!='' && $cliente->verifiedEmail== 1  }
+                                                <input type="tel" id="telefono" name="celular" value="" placeholder="Teléfono"
+                                                    maxlength="11" required />
+                                            {else}
+                                                <input type="tel" id="telefono" name="celular" value="{$cliente->cel_usuario}"
+                                                    placeholder="Teléfono" maxlength="11" required />
+                                            {/if}
+
                                         {else}
                                             <input type="tel" id="telefono" name="celular" value="{$cliente->cel_usuario}"
                                                 placeholder="Teléfono" maxlength="11" required disabled />
@@ -131,6 +156,7 @@
 
 
                                         {if $cliente->verified_checkout==0}
+
                                             <select name="tipdoc" id="sltctipodocumento">
                                                 {if !empty($lstDocumentos)}
                                                     {assign var="lodoc" value=8}
@@ -167,8 +193,13 @@
 
 
                                         {if $cliente->verified_checkout==0}
-                                            <input type="input" id="txtdocumento" value="{$cliente->nrodoc_usuario}"
-                                                name="nrodoc" placeholder="Documento" maxlength="{$lodoc}">
+                                            {if $cliente->id_google!='' && $cliente->verifiedEmail== 1  }
+                                                <input type="input" id="txtdocumento" value="" name="nrodoc"
+                                                    placeholder="Documento" maxlength="{$lodoc}">
+                                            {else}
+                                                <input type="input" id="txtdocumento" value="{$cliente->nrodoc_usuario}"
+                                                    name="nrodoc" placeholder="Documento" maxlength="{$lodoc}">
+                                            {/if}
                                         {else}
                                             <input type="input" id="txtdocumento" value="{$cliente->nrodoc_usuario}"
                                                 name="nrodoc" placeholder="Documento" maxlength="{$lodoc}" disabled>
@@ -197,6 +228,86 @@
 
                         </div>
                     </div>
+                    <!------------------------------------------------------------->
+
+                    <div class="seleccion">
+                        <div id="btndatos">
+                            <h4>Datos de Facturación</h4>
+                        </div>
+
+                    </div>
+                    <div class="datos titulo_seccion">
+                        <h3>DOCUMENTO DE VENTA</h3>
+                        <hr>
+
+                        <div class="form_facturacion">
+
+                            <div class="datos_facturacion">
+                                <div class="form_control ">
+                                    <div class="radios">
+                                        <label class="content-input" for="boleta">
+                                            <input type="radio" id="boleta" name="documento" checked>BOLETA DE VENTA
+                                        </label>
+
+                                        <label class="content-input" for="factura">
+                                            <input type="radio" id="factura" name="documento">FACTURA
+                                        </label>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                            <!------------------------ datos del ruc---------------------------------->
+
+
+                            <div id="ruc_detalle">
+
+                                <h4>Datos de la Empresa</h4>
+                                <hr>
+                                <div class="datos_ruc">
+                                    <div class="form_control">
+                                        <div class="control">
+                                            <label for="">RUC</label>
+                                            <div class="input_group">
+                                                <input type="text" id="ruc" name="ruc" value=""
+                                                    placeholder="Ingrese su RUC" maxlength="11" />
+                                                <button class="sunat" id="btnsunat"><i class="fa fa-cloud"></i></button>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="form_control">
+                                        <div class="control">
+                                            <label for="">Razón Social</label>
+                                            <input type="text" id="razsoc" name="razsoc" value=""
+                                                placeholder="Razón Social" maxlength="300" />
+                                        </div>
+                                    </div>
+                                    <div class="form_control">
+                                        <div class="control">
+                                            <label for="">Domicilio Fiscal</label>
+                                            <input type="text" id="domicilio_fiscal" name="domicilio_fiscal" value=""
+                                                placeholder="Domicilio Fiscal" maxlength="300" />
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+
+                            <!------------------------datos del ruc------------------------------------------------>
+
+
+
+                        </div>
+                    </div>
+                    <!------------------------------------------------------------->
                     <div class="seleccion">
 
                         <div id="btnentrega">
@@ -222,8 +333,6 @@
                                         </label>
                                     {/if}
                                 </div>
-
-
                             </div>
 
                             <div class="datos_detalle_entrega">
@@ -427,15 +536,16 @@
                             <input type="checkbox" id="privacidad">
                             <label for="terms">
                                 <span></span>
-                                Acepta nuestras <a href="{$RUTA_HTTP}/PoliticasPrivacidad" target="_blank">políticas de
-                                    privacidad y tratamientos de datos </a>
+                                He leído y acepto las condiciones de <a href="{$RUTA_HTTP}/PoliticasPrivacidad"
+                                    target="_blank">tratamiento de datos personales </a>
                             </label>
                         </div>
                         <div class="check_terms">
                             <input type="checkbox" id="terms">
                             <label for="terms">
                                 <span></span>
-                                Acepta nuestros <a href="{$RUTA_HTTP}/TerminosCondiciones" target="_blank">términos &
+                                He leído y acepta nuestros <a href="{$RUTA_HTTP}/TerminosCondiciones"
+                                    target="_blank">términos &
                                     condiciones</a>
                             </label>
                         </div>

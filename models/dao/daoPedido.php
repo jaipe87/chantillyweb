@@ -1,5 +1,7 @@
 <?php
 
+use Google\Service\CloudBuild\Param;
+
 require_once './models/dto/Pedido.php';
 
 class daoPedido
@@ -97,15 +99,19 @@ class daoPedido
             $oPedido->longitud = $Param["longitud"];
             $oPedido->st = 0;
             $oPedido->detalle = (!isset($Param["detalle"]) ? [] : $Param["detalle"]);
+            $oPedido->docventa = $Param["tipdocventa"];
+            $oPedido->ruc = $Param["ruc"];
+            $oPedido->razsoc = $Param["razsoc"];
+            $oPedido->dirfiscal = $Param["dirfiscal"];
 
             $sql = "INSERT INTO tabpedido(id_pedido,codigo,tipo_envio,idsucursal,coddep,codpro,coddis,direcc_entrega,ref_direccion,numorder,codresponse_niubiz,response_niubiz,
-              envio,subtotal,total,stterminos,stprivacidad,latitud,longitud,st)
+              envio,subtotal,total,stterminos,stprivacidad,latitud,longitud,st,docventa,ruc,razsoc,dirfiscal)
               VALUES('$oPedido->id_pedido','$oPedido->codigo','$oPedido->tipo_envio','$oPedido->idsucursal','$oPedido->coddep','$oPedido->codpro','$oPedido->coddis','$oPedido->direcc_entrega','$oPedido->ref_direccion',
               '$oPedido->numorder','$oPedido->codresponse_niubiz','$oPedido->response_niubiz','$oPedido->envio','$oPedido->subtotal','$oPedido->total','$oPedido->stterminos',
-              '$oPedido->stprivacidad','$oPedido->latitud','$oPedido->longitud','$oPedido->st') ON DUPLICATE KEY UPDATE codigo='$oPedido->codigo',tipo_envio='$oPedido->tipo_envio',idsucursal='$oPedido->idsucursal',
+              '$oPedido->stprivacidad','$oPedido->latitud','$oPedido->longitud','$oPedido->st','$oPedido->docventa','$oPedido->ruc','$oPedido->razsoc','$oPedido->dirfiscal') ON DUPLICATE KEY UPDATE codigo='$oPedido->codigo',tipo_envio='$oPedido->tipo_envio',idsucursal='$oPedido->idsucursal',
               coddep='$oPedido->coddep',codpro='$oPedido->codpro',coddis='$oPedido->coddis',direcc_entrega='$oPedido->direcc_entrega',ref_direccion='$oPedido->ref_direccion',numorder='$oPedido->numorder',codresponse_niubiz='$oPedido->codresponse_niubiz',
               response_niubiz='$oPedido->response_niubiz', envio='$oPedido->envio',subtotal='$oPedido->subtotal',total='$oPedido->total',stterminos='$oPedido->stterminos',stprivacidad='$oPedido->stprivacidad',
-              latitud='$oPedido->latitud',longitud='$oPedido->longitud',updated_at=now(), st='$oPedido->st'";
+              latitud='$oPedido->latitud',longitud='$oPedido->longitud',updated_at=now(), st='$oPedido->st',docventa='$oPedido->docventa',ruc='$oPedido->ruc',razsoc='$oPedido->razsoc',dirfiscal='$oPedido->dirfiscal'  ";
 
             $ind = $conn->Execute($sql);
 

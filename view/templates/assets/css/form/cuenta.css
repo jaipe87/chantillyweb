@@ -1,0 +1,57 @@
+.info_usuario {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  flex-direction: column;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  height: calc(100vh - 15.31em);
+}
+
+.info_usuario .row_info{
+    display: flex;
+    flex-flow:  row wrap;
+    justify-content: center;
+    align-items: center;
+
+}
+.info_usuario .row_info a {
+  text-align: center;
+  display: inline-block;
+  font-size: 1rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #000;
+  padding: 0 0.9375rem;
+  margin: 15px 0;
+  flex: 1 1 0%;
+
+}
+.info_usuario .row_info a span{
+    display: block;
+
+  background: #fff;
+  padding: 1rem;
+  border: 1px solid rgba(0,0,0,.07);
+  border-radius: 3px;
+  overflow: hidden;
+  color: #c41c1a;
+}
+.info_usuario .row_info a span i{
+    display: block;
+  font-size: 2.6rem;
+  width: 100%;
+  color: #c41c1a;
+  padding-bottom: 3.4rem;
+}
+.row_info button{
+    margin : 15px 0;
+    background-color: #c41c1a;
+    color: #fff;
+    border: none;
+    padding: 1.05em;
+
+}
