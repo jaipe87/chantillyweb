@@ -122,7 +122,7 @@ let initCart = async () => {
 
 }
 
-let addCart = async (pcodart, pcodartweb, pidkeke, pidrelleno, pcantidad = 1, pfecrecojo = "", pdedicatoria = "", view_msg = true) => {
+let addCart = async (pcodart, pcodartweb, pidkeke, pidrelleno, pcantidad = 1, pfecrecojo = "", pdedicatoria = "", view_msg = true, fn) => {
 	let tiene_dedicatoria = 0;
 	pdedicatoria = pdedicatoria.trim();
 	if (pdedicatoria.length == 0) {
@@ -239,6 +239,7 @@ let addCart = async (pcodart, pcodartweb, pidkeke, pidrelleno, pcantidad = 1, pf
 					initCart();
 					msg.Notifica(resultado.msg, "message", "top-right");
 				}
+				fn(resultado.success);
 			}).catch(error => {
 				msg.Notifica('Error al obtener los datos: ' + error);
 			});
@@ -249,7 +250,7 @@ let addCart = async (pcodart, pcodartweb, pidkeke, pidrelleno, pcantidad = 1, pf
 
 }
 
-let removeCart = async (pcodart, pidkeke, pidrelleno, pfecrecojo, pdedicatoria) => {
+let removeCart = async (pcodart, pidkeke, pidrelleno, pfecrecojo, pdedicatoria, view_msg = false ) => {
 	let url = new URL(urlpath + "/Detalle/DeleteItem/");
 	url.searchParams.append('id', pcodart);
 	url.searchParams.append('k', pidkeke);
@@ -350,7 +351,7 @@ let removeCart = async (pcodart, pidkeke, pidrelleno, pfecrecojo, pdedicatoria) 
 						$("#mySidebar .cart-body .cart-footer #btn-ordenar div > span").text((TotOrden).toFixed(2));
 
 					}
-					msg.Notifica(resultado.msg, "warning", "bottom-right");
+					if (view_msg)	msg.Notifica(resultado.msg, "warning", "bottom-right");
 				} else {
 					initCart();
 					msg.Notifica(resultado.msg, "message", "top-right");
@@ -366,11 +367,11 @@ let removeCart = async (pcodart, pidkeke, pidrelleno, pfecrecojo, pdedicatoria) 
 }
 let plusItem = (pcodart, pcodartweb, pidkeke, pidrelleno, pfecrecojo, pdedicatoria) => {
 
-	addCart(pcodart, pcodartweb, pidkeke, pidrelleno, 1, pfecrecojo, pdedicatoria, false);
+	addCart(pcodart, pcodartweb, pidkeke, pidrelleno, 1, pfecrecojo, pdedicatoria, false,()=>{});
 }
 let minusItem = (pcodart, pcodartweb, pidkeke, pidrelleno, pfecrecojo, pdedicatoria) => {
 
-	addCart(pcodart, pcodartweb, pidkeke, pidrelleno, -1, pfecrecojo, pdedicatoria, false);
+	addCart(pcodart, pcodartweb, pidkeke, pidrelleno, -1, pfecrecojo, pdedicatoria, false,()=>{});
 }
 
 let ValidacioncheckOut = (Texto)=>{

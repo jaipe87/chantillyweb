@@ -12,17 +12,17 @@
     <hr id="separacion2">
     <br>
     <section id="informacion">
-        <div class="header-cards">
-            <h1>{$titulo}</h1>
-        </div>
-        <br>
-        <div class="container">
 
+        <div class="container">
+            <div class="header-cards">
+                <h1>{$titulo}</h1>
+            </div>
+            <br>
             <div class="info_usuario">
                 <div class="login-form">
                     <form autocomplete="false">
                         <div class="form-group">
-                        
+
                             <label>Nombres <small>(Obligatorio)</small></label>
                             <input type="text" required autocomplete="off" name="nombres" value="{$cliente->nom_usuario}"
                                 class="form-control text-uppercase" placeholder="Ingrese su(s) Nombre(s)" id="txtNombre"
@@ -56,7 +56,8 @@
                                             {/if}
                                         </select>
                                         <input type="text" required autocomplete="off" class="form-control text-uppercase"
-                                            name="nrodoc" placeholder="Documento de Identidad" id="txtNroDoc" maxlength="8"  value="{$cliente->nrodoc_usuario}"  >
+                                            name="nrodoc" placeholder="Documento de Identidad" id="txtNroDoc" maxlength="8"
+                                            value="{$cliente->nrodoc_usuario}">
 
                                     </div>
 

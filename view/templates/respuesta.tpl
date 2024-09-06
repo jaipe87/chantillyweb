@@ -145,7 +145,10 @@
 
                         <div class="respuesta_button buttons-save">
                             <button type="button" onclick="ImprimirTrans()"><b class="">Imprimir</b></button>
+                     
                             <button type="button" onclick="SeguirComprando()"><b class="">Seguir comprando</b></button>
+
+                            <button type="button" onclick="Ircompras()"><b class="">Ir a mis compras</b></button>
                         </div>
 
                     {elseif $data_transaction["statusCode"] == $HTTP_CODE_BAD_REQUEST  }

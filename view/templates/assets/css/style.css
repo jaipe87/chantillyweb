@@ -189,10 +189,9 @@ header {
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.15);
   border-radius: 0;
- 
 }
-.contenedor .lista_sesion .lista_sesion_li  {
- padding: 5px  0 5px 10px;
+.contenedor .lista_sesion .lista_sesion_li {
+  padding: 5px 0 5px 10px;
 }
 
 .contenedor .lista_sesion .lista_sesion_li .link_sesion {
@@ -1500,7 +1499,7 @@ border-radius: 0 0 5px 5px;
   flex-grow: 1;
   overflow-y: auto;
 }
-.mt-10{
+.mt-10 {
   margin-top: 10px !important;
 }
 .sidebar .cart-body .cart-items .cart-item {
@@ -1787,7 +1786,12 @@ border-radius: 0 0 5px 5px;
   font-size: 40px;
 }
 
-input[type='text'].invalido, input[type='date'].invalido, input[type='time'].invalido, input[type='mail'].invalido, input[type='password'].invalido, input[type='tel'].invalido {
+input[type="text"].invalido,
+input[type="date"].invalido,
+input[type="time"].invalido,
+input[type="mail"].invalido,
+input[type="password"].invalido,
+input[type="tel"].invalido {
   border: 1px red solid !important;
   background: url(../images/invalid.png) no-repeat 98% center !important;
   z-index: 1;
@@ -1805,7 +1809,12 @@ select.invalido {
   z-index: 1;
 }
 
-input[type='text'].ok, input[type='date'].ok, input[type='time'].ok, input[type='mail'].ok, input[type='tel'].ok,input[type='password'].ok {
+input[type="text"].ok,
+input[type="date"].ok,
+input[type="time"].ok,
+input[type="mail"].ok,
+input[type="tel"].ok,
+input[type="password"].ok {
   background: url(../images/valid.png) no-repeat 98% center !important;
   z-index: 1;
 }
@@ -1821,11 +1830,10 @@ select.ok {
   z-index: 1;
 }
 
-.login_register{
-
+.login_register {
   display: flex;
   flex-flow: column nowrap;
 }
-#linkRecuperar{
+#linkRecuperar {
   text-decoration: underline;
 }

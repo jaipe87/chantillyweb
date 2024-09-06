@@ -151,7 +151,7 @@ class apiController
                     $id_usuario = $cliente->id_usuario;
                     $oUsuario = $daoUsuario->GetUsuario(["id_usuario" => $id_usuario]);
                     if ($oUsuario) {
-                        $url = "http://www.amkdelivery.com/Reniec/consultaSunatJSON.php?ruc=$ruc";
+                        $url = "https://www.amkdelivery.com/Reniec/consultaSunatJSON.php?ruc=$ruc";
                         $header = [
                             'Accept: application/json',
                             'Content-Type: "application/json; charset=UTF-8'

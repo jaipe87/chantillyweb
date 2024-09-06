@@ -1,3 +1,43 @@
+
+
+<footer>
+    <div id="container-info">
+        <div class="footer-nosotros">
+            <div class="title-footer">
+                <h1>Nosotros</h1>
+                <p>{$empresa->nosotros}
+                </p>
+            </div>
+        </div>
+        <div class="footer-links">
+            <div class="title-footer">
+                <a href="{$RUTA_HTTP}"><img src="{$asset}/images/icons/{$empresa->logo_footer}" alt="" width="20%"
+                        height="20%"></a>
+                <h1>Redes sociales</h1>
+                <div class="icons-redesSociales">
+                    <a href="{$empresa->facebook}"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="{$empresa->instagram}"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="{$empresa->twitter}"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="{$empresa->tiktok}"><i class="fa-brands fa-tiktok"></i></a>
+                    <a href="{$empresa->whatsapp1}" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-metodos-pago">
+            <div class="title-footer">
+                <h1>Métodos de Pago</h1>
+            </div>
+            <div class="icons-footer">
+                <img src="{$asset}/images/icons/icon-plin.png" alt="" width="16%">
+                <img src="{$asset}/images/icons/icon-yape.png" alt="" width="15%">
+                <img src="{$asset}/images/icons/icon-mastercard.png" alt="" width="25%">
+                <img src="{$asset}/images/icons/icon-visa.png" alt="" width="23%">
+            </div>
+        </div>
+    </div>
+
+    <body>
+</footer>
 <div id="chat">
     <div class="content-chat" style="display: none; z-index: 3;">
         <div class="wrapper">
@@ -63,46 +103,6 @@
         </div>
     </div>
 </div>
-<footer>
-    <div id="container-info">
-        <div class="footer-nosotros">
-            <div class="title-footer">
-                <h1>Nosotros</h1>
-                <p>{$empresa->nosotros}
-                </p>
-            </div>
-        </div>
-        <div class="footer-links">
-            <div class="title-footer">
-                <a href="{$RUTA_HTTP}"><img src="{$asset}/images/icons/{$empresa->logo_footer}" alt="" width="20%"
-                        height="20%"></a>
-                <h1>Redes sociales</h1>
-                <div class="icons-redesSociales">
-                    <a href="{$empresa->facebook}"><i class="fa-brands fa-facebook"></i></a>
-                    <a href="{$empresa->instagram}"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="{$empresa->twitter}"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="{$empresa->tiktok}"><i class="fa-brands fa-tiktok"></i></a>
-                    <a href="{$empresa->whatsapp1}" target="_blank"><i class="fa-brands fa-whatsapp"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-metodos-pago">
-            <div class="title-footer">
-                <h1>Métodos de Pago</h1>
-            </div>
-            <div class="icons-footer">
-                <img src="{$asset}/images/icons/icon-plin.png" alt="" width="16%">
-                <img src="{$asset}/images/icons/icon-yape.png" alt="" width="15%">
-                <img src="{$asset}/images/icons/icon-mastercard.png" alt="" width="25%">
-                <img src="{$asset}/images/icons/icon-visa.png" alt="" width="23%">
-            </div>
-        </div>
-    </div>
-
-    <body>
-</footer>
-
-
 
 <script src="{$asset}/js/lib/alertify/alertify.min.js"></script>
 <script src="{$asset}/js/util.js?v={0|rand:100}"></script>

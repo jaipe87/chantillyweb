@@ -17,7 +17,9 @@ let SeguirComprando = function () {
 let RegresarCheckOut = function () {
     window.location.href = urlpath + '/Checkout';
 }
-
+let Ircompras = function () {
+    window.location.replace(urlpath + '/Cuenta/mis_compras');
+}
 let ImprimirTrans = function(){
 
      window.print();

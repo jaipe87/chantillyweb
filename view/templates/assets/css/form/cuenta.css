@@ -3,12 +3,12 @@
   display: -ms-flexbox;
   display: flex;
   flex-direction: column;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
+  -ms-flex-wrap: nowrap;
+  flex-wrap: nowrap;
   -webkit-box-pack: start;
   -ms-flex-pack: start;
   justify-content: flex-start;
-  height: calc(100vh - 15.31em);
+ 
 }
 
 .info_usuario .row_info{
@@ -28,6 +28,7 @@
   padding: 0 0.9375rem;
   margin: 15px 0;
   flex: 1 1 0%;
+  width: 100%;
 
 }
 .info_usuario .row_info a span{
@@ -54,4 +55,16 @@
     border: none;
     padding: 1.05em;
 
+}
+@media (max-width: 768px) {
+  .info_usuario .row_info {
+    flex-flow: column nowrap !important;
+  }
+}
+@media (min-width: 700px) {
+  .info_usuario {
+ 
+   height: calc(100vh - 15.31em);
+  }
+  
 }

@@ -209,8 +209,15 @@ let setupPagination = (totalItems, currentPage, limit) => {
 let addAccesorio = (e) => {
     let pcodart = e.getAttribute("data-id");
     let pcodartweb = e.getAttribute("data-wb");
-    addCart(pcodart, pcodartweb, 0, 0);
-    return ; 
+    addCart(pcodart, pcodartweb, 0, 0, 1, '', '', false,function(e){
+        if(e){
+
+            toggleSidebar();
+        }
+    });
+
+    
+    return;
 }
 $(document).ready(() => {
     let preciounico = "0.00";
@@ -223,8 +230,8 @@ $(document).ready(() => {
     $("input[type='date']").val("");
     $("#dedicatoria").val("");
 
-  
-  
+
+
     metodos.RefreshDatosBocaditos();
 
 
@@ -320,7 +327,12 @@ $(document).ready(() => {
         pdedicatoria = pdedicatoria.trim();
 
 
-        addCart(pcodart, pcodartweb, pidkeke, pidrelleno, pcantidad, pfecrecojo, pdedicatoria);
+        addCart(pcodart, pcodartweb, pidkeke, pidrelleno, pcantidad, pfecrecojo, pdedicatoria, false, function (e) {
+            if (e) {
+                toggleSidebar();
+            }
+
+        });
 
 
         return;

@@ -4,9 +4,10 @@
     <div class="container-producto">
 
         <div id="producto" data-wb="{$producto->codart_web}" data-wb-cd="{$producto->cod_categoria}"
-         pc="{$producto->mostrar_porciones}" kk="{$producto->mostrar_kekes}" rr="{$producto->mostrar_relleno}" dr="{$producto->mostrar_dia_recojo}" dd="{$producto->mostrar_dedicatoria}">
+            pc="{$producto->mostrar_porciones}" kk="{$producto->mostrar_kekes}" rr="{$producto->mostrar_relleno}"
+            dr="{$producto->mostrar_dia_recojo}" dd="{$producto->mostrar_dedicatoria}">
             <div class="vertical-images">
-                <img id="vertical-image" src="{$asset}{$producto->url}" alt="{$producto->descri_corta}" width="100%">
+                <img id="vertical-image" style="visibility: hidden;" src="{$asset}{$producto->url}" alt="{$producto->descri_corta}" width="100%">
             </div>
             <div class="image-producto">
                 <img id="image-producto" src="{$asset}{$producto->url}" alt="{$producto->descri_corta}" width="100%">
@@ -46,7 +47,7 @@
                                 <option selected value="0">Elige una opción</option>
                                 {if !empty($lista_porciones)}
                                     {foreach $lista_porciones as $row}
-                                        <option value="{$row->codart}" data-porcion ="{$row->descri}">
+                                        <option value="{$row->codart}" data-porcion="{$row->descri}">
                                             {$row->porciones} ({$row->porciones_detalle})</option>
                                     {/foreach}
                                 {/if}
@@ -86,11 +87,12 @@
                         <div class="dedicatoria">
                             <div>
                                 <h5>Nombre o Dedicatoria</h5>
-                              <!--  <p>(Tarjeta dentro del sobre adicional a la torta) + S/ <span id="adicional">{$impdedicatoria}</span> </p>-->
+                                <!--  <p>(Tarjeta dentro del sobre adicional a la torta) + S/ <span id="adicional">{$impdedicatoria}</span> </p>-->
                             </div>
 
 
-                            <textarea id="dedicatoria" cols="5" rows="5" placeholder="Escribe tu dedicatoria" data-ok="0"></textarea>
+                            <textarea id="dedicatoria" cols="5" rows="5" placeholder="Escribe tu dedicatoria"
+                                data-ok="0"></textarea>
 
                         </div>
                     {/if}
@@ -100,22 +102,27 @@
 
                         {if $producto_unico->precio!=0}
                             <div class="total">
-                                <h2 id="total-product" data-precio="{$producto_unico->precio}"> S/ <span>{$producto_unico->precio}</span> </h2>
+                                <h2 id="total-product" data-precio="{$producto_unico->precio}"> S/
+                                    <span>{$producto_unico->precio}</span> </h2>
                             </div>
-                            <button id="btnProducto" data-id="{$producto_unico->codart}" data-k="0" data-r="0" data-f="" data-d="">Agregar al carrito</button>
+                            <button id="btnProducto" data-id="{$producto_unico->codart}" data-k="0" data-r="0" data-f=""
+                                data-d="">Agregar al carrito</button>
                         {else}
                             <div class="total">
                                 <h2 id="total-product" data-precio="0.00">S/<span>-</span> </h2>
                             </div>
-                            <button id="btnProducto" data-id="" data-k="0" data-r="0" data-f="" data-d="">Agregar al carrito</button>
+                            <button id="btnProducto" data-id="" data-k="0" data-r="0" data-f="" data-d="">Agregar al
+                                carrito</button>
                         {/if}
                     </div>
 
-                    <div class="note_footer">   
-                            <p >
-                              <i class="fa-solid fa-square-check"></i>     Si tiene alguna duda o consulta lo puede realizar en nuestro chat en línea y si tiene algún pedido especial lo puede realizar mediante nuestro WhatsApp  
-                            </p>
-                        
+                    <div class="note_footer">
+                        <p>
+                            <i class="fa-solid fa-square-check"></i> Si tiene alguna duda o consulta lo puede realizar en
+                            nuestro chat en línea y si tiene algún pedido especial lo puede realizar mediante nuestro
+                            WhatsApp
+                        </p>
+
                     </div>
                 </div>
             </div>
@@ -132,7 +139,8 @@
                                     <p class="titulo">{$row->descri_corta}</p>
                                     <div class="info precio">
                                         <b>S/ {$row->precio}</b>
-                                        <button  class="agregar-accesorio"  data-wb  ="{$row->codart_web}" data-id="{$row->codart}" data-k="0" data-r="0" data-f="" data-d="" onclick="addAccesorio(this)">Agregar</button>
+                                        <button class="agregar-accesorio" data-wb="{$row->codart_web}" data-id="{$row->codart}"
+                                            data-k="0" data-r="0" data-f="" data-d="" onclick="addAccesorio(this)">Agregar</button>
                                     </div>
                                 </div>
                             {/foreach}

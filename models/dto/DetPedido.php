@@ -19,7 +19,7 @@ class DetPedido
     public $pordesc=0.00;
     public $descto=0.00;
     public $neto=0.00;
-
+    public $urldet= "";
 
     public function __GET($k)
     {

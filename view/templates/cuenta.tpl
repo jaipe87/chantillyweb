@@ -13,7 +13,7 @@
     <br>
     <section id="informacion">
         <div class="container">
-
+            <br>
             <div class="info_usuario">
 
 
@@ -22,7 +22,7 @@
                     <a id="identity-link" href="{$RUTA_HTTP}/Cuenta/mis_datos" class="">
                         <span class="link-item"><i class="fa-solid fa-user"></i>INFORMACIÓN</span>
                     </a>
-                    <a id="history-link" class="" href="{$RUTA_HTTP}/Cuenta/mis_pedidos">
+                    <a id="history-link" class="" href="{$RUTA_HTTP}/Cuenta/mis_compras">
                         <span class="link-item"><i class="fa fa-calendar"></i>HISTORIAL Y DETALLES DE MIS PEDIDOS</span>
                     </a>
                 </div>
@@ -41,6 +41,7 @@
 
         </div>
     </section>
+<br>
 {/block}
 
 {block name="scripts"}
