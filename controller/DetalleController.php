@@ -490,4 +490,45 @@ class DetalleController
             die($e->getMessage());
         }
     }
+
+    public function change_imagen_detalle_porcion()
+    {
+        header('Content-Type: application/json');
+        try {
+         
+            $codart_web = isset($_REQUEST['codart_web']) ? $_REQUEST['codart_web'] : "";
+            $codart = isset($_REQUEST['codart']) ? $_REQUEST['codart'] : "";
+            if (!$codart_web) {
+                echo json_encode(["success" => false, "data" => [], "msg" => "Producto no encontrado !!"], JSON_PRETTY_PRINT);
+                return;
+            }
+            $codart_web = Desencriptar($codart_web);
+            $codart = Desencriptar($codart);
+
+            $daoProducto =  new daoProducto_web($this->DB);
+            $oProducto = new Producto();
+            $oProducto = $daoProducto->select_one_Producto_detalle_img(["cia" => $this->cia, "codart_web" => $codart_web, "codart" => $codart]);
+            if (!$oProducto) {
+                echo json_encode(["success" => false, "data" => [], "msg" => "Seleccione una Porción válida !!"], JSON_PRETTY_PRINT);
+                return;
+            }
+            $data = [];
+            if (is_object($oProducto)) {
+                $data = $oProducto;
+                echo json_encode([
+                    "success" => true,
+                    "data" => $data,
+                    "msg" => ""
+                ], JSON_PRETTY_PRINT);
+            } else {
+                echo json_encode([
+                    "success" => false,
+                    "data" => $data,
+                    "msg" => "No se han encontrado registros a mostrar"
+                ], JSON_PRETTY_PRINT);
+            }
+        } catch (Exception $e) {
+            die($e->getMessage());
+        }
+    }
 }

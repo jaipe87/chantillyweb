@@ -143,6 +143,45 @@ let metodos = {
         } catch (err) {
             console.error(err);
         }
+    },
+    Select_one_img: async (codart_web, codart) => {
+        let url = new URL(urlpath + "/Detalle/change_imagen_detalle_porcion/");
+        url.searchParams.append('codart_web', codart_web);
+        url.searchParams.append('codart', codart);
+        const dataRequest = {
+            method: "GET",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json; charset=UTF-8",
+            },
+        };
+
+        const img = document.getElementById('image-producto');
+        let url_img = img.getAttribute('src');
+       
+        try {
+            await fetch(url, dataRequest)
+                .then((resultado) => resultado.json())
+                .then((resultado) => {
+                 
+                    if (resultado.success) {
+                        if (resultado.data != undefined) {
+                            let producto = resultado.data;
+                            url_img = producto.url;
+                            img.setAttribute('src', assets + '/' +  url_img);
+                        }
+
+                    } else {
+                        img.setAttribute('src', url_img);
+
+                    }
+                 
+                }).catch(error => {
+                    msg.Notifica('Error al obtener los datos: ' + error);
+                });
+        } catch (err) {
+            msg.Notifica(err);
+        }
     }
 };
 
@@ -209,14 +248,14 @@ let setupPagination = (totalItems, currentPage, limit) => {
 let addAccesorio = (e) => {
     let pcodart = e.getAttribute("data-id");
     let pcodartweb = e.getAttribute("data-wb");
-    addCart(pcodart, pcodartweb, 0, 0, 1, '', '', false,function(e){
-        if(e){
+    addCart(pcodart, pcodartweb, 0, 0, 1, '', '', false, function (e) {
+        if (e) {
 
             toggleSidebar();
         }
     });
 
-    
+
     return;
 }
 $(document).ready(() => {
@@ -244,6 +283,9 @@ $(document).ready(() => {
             $("#total-product span").text("0.00");
             return;
         }
+
+        metodos.Select_one_img(codart_web, codart);
+
         metodos.Select_one_porciones(codart_web, codart, (precio) => {
             let precio_final = precio;
 

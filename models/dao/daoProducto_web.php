@@ -365,6 +365,7 @@ class daoProducto_web
             return [];
         }
     }
+    /*** verificar tabart ** */
     public function select_one_Producto_detalle($Param)
     {
         $conn = $this->link;
@@ -372,7 +373,7 @@ class daoProducto_web
         $codart_web = $Param["codart_web"];
         $codart = $Param["codart"];
         $sql = "SELECT tabart.codart,tabart.descri, tabart.porciones,tabart.precio,tabart.porciones_detalle,tabart.horas,
-                 tabart_web.codart_web, tabart_web.descri_corta,tabart_web.url,tabart_web.mostrar_porciones,tabart_web.mostrar_kekes,
+                 tabart_web.codart_web, tabart_web.descri_corta,if(tabart.urldet = '' or tabart.urldet is null,tabart_web.url,tabart.urldet)   url ,tabart_web.mostrar_porciones,tabart_web.mostrar_kekes,
                  tabart_web.mostrar_relleno,tabart_web.mostrar_dia_recojo,tabart_web.mostrar_dedicatoria  FROM   tabart_web  
                 INNER JOIN  tabart  ON tabart_web.cia=tabart.cia AND tabart_web.codart_web=tabart.codart_web 
                 WHERE tabart_web.cia=$cia AND tabart_web.codart_web = '$codart_web' AND tabart.codart='$codart' ;";
@@ -507,7 +508,7 @@ class daoProducto_web
         return $total;
     }
 
-
+    /**  verificar tabart */
     public function select_all_Productos_accesorios($Param)
     {
         $conn = $this->link;
@@ -515,7 +516,7 @@ class daoProducto_web
         $cia = $Param["cia"];
 
 
-        $sql = "SELECT  tabart_web.codart_web,tabart.codart,tabart_web.descri_corta, tabart.precio,tabart_web.cod_categoria,tabart_web.url  FROM   tabart_web  
+        $sql = "SELECT  tabart_web.codart_web,tabart.codart,tabart_web.descri_corta, tabart.precio,tabart_web.cod_categoria,   if(tabart.urldet = '' or tabart.urldet is null,tabart_web.url,tabart.urldet) url   FROM   tabart_web  
                 INNER JOIN  tabart  ON tabart_web.cia=tabart.cia AND tabart_web.codart_web=tabart.codart_web 
                 WHERE tabart_web.cia=$cia AND tabart_web.tipo_producto=5 ";
 
@@ -614,5 +615,31 @@ class daoProducto_web
             $total = 0.00;
         }
         return $total;
+    }
+
+     public function select_one_Producto_detalle_img($Param)
+    {
+        $conn = $this->link;
+        $cia = $Param["cia"];
+        $codart_web = $Param["codart_web"];
+        $codart = $Param["codart"];
+        $sql = "SELECT  tabart.codart,tabart_web.codart_web, if(tabart.urldet = '' or tabart.urldet is null,tabart_web.url,tabart.urldet) url 
+                FROM   tabart_web  
+                INNER JOIN  tabart  ON tabart_web.cia=tabart.cia AND tabart_web.codart_web=tabart.codart_web 
+                WHERE tabart_web.cia=$cia AND tabart_web.codart_web = '$codart_web' AND tabart.codart='$codart' ;";
+
+        $rs = $conn->execute($sql);
+
+        $recordCount = $rs->recordCount();
+        if ($recordCount > 0) {
+            $lista = $rs->GetRows()[0];
+            $oProducto = new Producto();
+            $oProducto->codart = Encriptar($lista['codart']);
+            $oProducto->codart_web = Encriptar($lista['codart_web']);
+            $oProducto->url = $lista['url'];
+            return $oProducto;
+        } else {
+            return [];
+        }
     }
 }
